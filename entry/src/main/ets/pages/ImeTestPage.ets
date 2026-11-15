@@ -15,7 +15,7 @@ struct ImeTestPage {
   }
 
   private async openImeSettingsPage(): Promise<void> {
-    const ctx = this.getUIContext().getHostContext() as common.UIAbilityContext
+    const ctx = getContext(this) as common.UIAbilityContext
     try {
       // Priority: open system input-method settings page directly.
       const settingsWant: Want = {

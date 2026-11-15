@@ -11,7 +11,7 @@ export struct keyItemGray {
   @Link menuType: number
 
   @State isChinese: boolean = AppStorage.get<boolean>("isChinese") ?? false
-  @State isNineKey: boolean = AppStorage.get<boolean>("isNineKey") ?? false
+  @StorageLink('isNineKey') isNineKey: boolean = AppStorage.get<boolean>("isNineKey") ?? false
   @State isNineKeyBack: boolean = AppStorage.get<boolean>("isNineKeyBack") ?? false
   @StorageLink("themeMode") themeMode: string = 'light'
 

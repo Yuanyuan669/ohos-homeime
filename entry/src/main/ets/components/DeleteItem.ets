@@ -9,7 +9,7 @@ export struct DeleteItem {
   @StorageLink("pinyin") pinyin: string = ""
   @StorageLink('isChinese') isChinese: boolean = false
   @StorageLink("themeMode") themeMode: string = 'light'
-  @State isNineKey: boolean = AppStorage.get<boolean>("isNineKey") ?? false
+  @StorageLink('isNineKey') isNineKey: boolean = AppStorage.get<boolean>("isNineKey") ?? false
   @State timerId: number = -1
   @State longPressDelayId: number = -1
   @Styles
@@ -66,8 +66,8 @@ export struct DeleteItem {
         this.stopContinuousDelete()
       }
     })
-    .width(this.isNineKey ? this.inputStyle.nineButtonWidth : this.inputStyle.switchButtonWidth)
-    .height(this.isNineKey ? this.inputStyle.nineButtonHeight : this.inputStyle.basicButtonHeight)
+    .width(this.inputStyle.switchButtonWidth)
+    .height(this.inputStyle.basicButtonHeight)
         .margin({ left: 3, right: 3, top: 1, bottom: 1 })
     .shadow({ radius: 1, color: FcitxTheme.shadowColor(this.themeMode), offsetY: 1 })
     .stateStyles({

@@ -48,12 +48,7 @@ export struct keyItemNumber {
         .width('100%')
         .height('100%')
       } else {
-        Text(this.keyValue.title)
-          .fontSize(this.inputStyle.litterNumberFontSize)
-          .fontColor(FcitxTheme.textSecondary(this.themeMode))
-          .fontWeight(FontWeight.Regular)
-          .margin({ top: 4 })
-        Text(this.isChinese ? this.keyValue.upperContent :
+        Text(this.isChinese ? this.keyValue.content :
             this.upper === 0 ? this.keyValue.content : this.keyValue.upperContent)
           .fontSize(this.inputStyle.en_fontSize)
           .fontColor(FcitxTheme.textPrimary(this.themeMode))
@@ -72,7 +67,7 @@ export struct keyItemNumber {
         InputHandler.getInstance().insertText(this.keyValue.upperContent);
       }
     })
-    .width(this.inputStyle.basicButtonWidth)
+    .layoutWeight(1)
     .height('100%')
     .margin({ left: 3, right: 3, top: 1, bottom: 1 })
     .shadow({ radius: 1, color: FcitxTheme.shadowColor(this.themeMode), offsetY: 1 })

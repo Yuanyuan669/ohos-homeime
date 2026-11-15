@@ -26,12 +26,14 @@ import { keyMenu } from '../components/KeyMenu'
 import { NumberMenu } from '../components/NumberMenu'
 import { SymbolMenu } from '../components/SymbolMenu'
 import { ChineseKeyMenu } from '../components/ChineseKeyMenu'
+import { NineKeyMenu } from '../components/NineKeyMenu'
 import { PinYinView } from '../components/PinYinView'
 import { KeySetView } from '../components/KeySetView'
 import { EmojiMenu } from '../components/EmojiMenu'
 
 import deviceInfo from '@ohos.deviceInfo'
 import common from '@ohos.app.ability.common';
+import preferences from '@ohos.data.preferences';
 import { BusinessError } from '@ohos.base'
 import ConfigurationConstant from '@ohos.app.ability.ConfigurationConstant'
 import { InputHandler } from '../model/KeyboardController'
@@ -73,8 +75,15 @@ struct Index {
     this.menuType = 3
     AppStorage.setOrCreate('themeMode', AppStorage.get<string>('themeMode') ?? 'light')
     AppStorage.setOrCreate('systemDarkMode', AppStorage.get<boolean>('systemDarkMode') ?? false)
-    AppStorage.setOrCreate('isNineKey', false)
-    AppStorage.setOrCreate('isNineKeyBack', false)
+    AppStorage.setOrCreate('isNineKey', AppStorage.get<boolean>('isNineKey') ?? false)
+    AppStorage.setOrCreate('isNineKeyBack', AppStorage.get<boolean>('isNineKeyBack') ?? false)
+    try {
+      const prefsCtx = getContext(this) as common.UIAbilityContext
+      const prefs = preferences.getPreferencesSync(prefsCtx, { name: 'homeime' })
+      const nine = prefs.getSync('isNineKey', false) as boolean
+      AppStorage.setOrCreate('isNineKey', nine)
+    } catch (e) {
+    }
     this.syncSystemDarkMode()
     if (this.colorModeWatchTimer < 0) {
       this.colorModeWatchTimer = setInterval(() => {
@@ -105,7 +114,7 @@ struct Index {
   private initRawDict() {
     try {
       InputHandler.getInstance().addLog('getRawFd');
-      const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+      const context = getContext(this) as common.UIAbilityContext;
       context.resourceManager.getRawFd("dict_pinyin.dat").then(value => {
         InputHandler.getInstance().initPinyin(value, context.filesDir);
       }).catch((error: BusinessError) => {
@@ -116,7 +125,7 @@ struct Index {
 
   private syncSystemDarkMode(): void {
     try {
-      const hostContext = this.getUIContext().getHostContext() as common.UIAbilityContext
+      const hostContext = getContext(this) as common.UIAbilityContext
       const colorModeValue = Number(hostContext.config?.colorMode ?? -1)
       const isDark = colorModeValue === ConfigurationConstant.ColorMode.COLOR_MODE_DARK
       AppStorage.setOrCreate('systemDarkMode', isDark)
@@ -140,7 +149,9 @@ struct Index {
           }
           if (!this.isMoreText || this.pinyin.length <= 0) {
             Column() {
-              if (this.menuType === 0) {
+              if (this.isNineKey && this.menuType === 3) {
+                NineKeyMenu({ menuType: $menuType, inputStyle: $inputStyle })
+              } else if (this.menuType === 0) {
                 keyMenu({ keyList: this.keyList, menuType: $menuType, inputStyle: $inputStyle })
               } else if (this.menuType === 1) {
                 NumberMenu({ numberList: this.numberList, menuType: $menuType, inputStyle: $inputStyle })

@@ -73,7 +73,7 @@ struct PrivatePreview {
                     this.showImeChooseSheet = false;
                   })
                     .catch((reason: BusinessError) => {
-                      promptAction.openToast({ message: reason.message })
+                      promptAction.showToast({ message: reason.message })
                     })
                 }
               })

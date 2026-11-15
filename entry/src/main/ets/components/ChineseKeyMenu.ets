@@ -28,7 +28,7 @@ export struct ChineseKeyMenu {
 
   build() {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center }) {
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 6 }) {
         ForEach(this.keyList.slice(0, 10), (item: keySourceListType) => {
           keyItemNumber({ keyValue: item, upper: $upper,
             inputStyle: $inputStyle })
@@ -38,7 +38,7 @@ export struct ChineseKeyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 6 }) {
         Stack() {
         }.width('4%').height(0)
 
@@ -53,7 +53,7 @@ export struct ChineseKeyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 6 }) {
         Stack() {
           Image($rawfile(this.upper === 1 ? 'shift light.svg' :
               this.upper === 2 ? 'shift light long.svg' : 'shift.svg'))

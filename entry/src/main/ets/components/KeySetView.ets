@@ -1,5 +1,7 @@
 import { KeyStyle } from '../common/styleConfiguration'
 import { FcitxTheme } from '../common/FcitxTheme'
+import common from '@ohos.app.ability.common'
+import preferences from '@ohos.data.preferences'
 
 
 @Component
@@ -11,8 +13,7 @@ export struct KeySetView {
 
   aboutToAppear() {
     this.keyboardOpacity = this.inputStyle.buttonOpacity
-    AppStorage.setOrCreate('isNineKey', false)
-    this.isNineKey = false
+    AppStorage.setOrCreate('isNineKey', AppStorage.get<boolean>('isNineKey') ?? false)
   }
 
   private statusText(enabled: boolean): string {
@@ -78,9 +79,8 @@ export struct KeySetView {
   }
 
   build() {
-    Scroll() {
-      Column({ space: 10 }) {
-        Row() {
+    Column({ space: 10 }) {
+      Row() {
           Text('设置')
             .fontSize(16)
             .fontColor(FcitxTheme.textPrimary(this.themeMode))
@@ -101,7 +101,37 @@ export struct KeySetView {
 
         this.sectionHeader('基础设置')
         Column({ space: 6 }) {
-          this.settingRow('键盘布局', '当前仅保留 26 键布局', '26键', false)
+          Row({ space: 8 }) {
+            Column({ space: 2 }) {
+              Text('键盘布局')
+                .fontSize(15)
+                .fontColor(FcitxTheme.textPrimary(this.themeMode))
+              Text('切换 26 键 / 九键（多击拼音）')
+                .fontSize(12)
+                .fontColor(FcitxTheme.textSecondary(this.themeMode))
+                .maxLines(1)
+            }
+            .layoutWeight(1)
+
+            Toggle({ type: ToggleType.Switch, isOn: this.isNineKey })
+              .onChange((isOn: boolean) => {
+                this.isNineKey = isOn
+                AppStorage.setOrCreate('isNineKey', isOn)
+                try {
+                  const prefsCtx = getContext(this) as common.UIAbilityContext
+                  const prefs = preferences.getPreferencesSync(prefsCtx, { name: 'homeime' })
+                  prefs.putSync('isNineKey', isOn)
+                  prefs.flush()
+                } catch (e) {
+                }
+              })
+              .width(52)
+          }
+          .width('100%')
+          .height(48)
+          .padding({ left: 12, right: 10 })
+          .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))
+          .borderRadius(10)
         }
         .width('100%')
         .padding({ left: 8, right: 8, top: 8, bottom: 8 })
@@ -110,15 +140,36 @@ export struct KeySetView {
 
         this.sectionHeader('外观设置')
         Column({ space: 8 }) {
-          Button() {
-            this.settingRow('主题模式', '切换浅色 / 深色 / 跟随系统', this.themeModeLabel(), this.themeMode !== 'light')
+          Row({ space: 8 }) {
+            Column({ space: 2 }) {
+              Text('主题模式')
+                .fontSize(15)
+                .fontColor(FcitxTheme.textPrimary(this.themeMode))
+              Text('切换浅色 / 深色 / 跟随系统')
+                .fontSize(12)
+                .fontColor(FcitxTheme.textSecondary(this.themeMode))
+                .maxLines(1)
+            }
+            .layoutWeight(1)
+
+            Text(this.themeModeLabel())
+              .fontSize(12)
+              .fontColor(this.themeMode !== 'light' ? '#1e5fd6' : FcitxTheme.textSecondary(this.themeMode))
+              .padding({ left: 8, right: 8, top: 3, bottom: 3 })
+              .backgroundColor(this.themeMode !== 'light' ? '#dbe9ff' : FcitxTheme.functionKeyBg(this.themeMode))
+              .borderRadius(9)
+              .onClick(() => {
+                const modes: string[] = ['light', 'dark', 'system']
+                const nextMode = modes[(modes.indexOf(this.themeMode) + 1) % modes.length]
+                this.themeMode = nextMode
+                AppStorage.setOrCreate('themeMode', this.themeMode)
+              })
           }
-          .onClick(() => {
-            const modes: string[] = ['light', 'dark', 'system']
-            const nextMode = modes[(modes.indexOf(this.themeMode) + 1) % modes.length]
-            this.themeMode = nextMode
-            AppStorage.setOrCreate('themeMode', this.themeMode)
-          })
+          .width('100%')
+          .height(48)
+          .padding({ left: 12, right: 10 })
+          .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))
+          .borderRadius(10)
 
           Column({ space: 6 }) {
             this.settingRow('键盘透明度', '调整键盘背景与按键透明度', `${Math.round(this.keyboardOpacity * 100)}%`, false)
@@ -145,8 +196,7 @@ export struct KeySetView {
         .backgroundColor(FcitxTheme.panelBg(this.themeMode))
         .borderRadius(12)
       }
-      .padding({ left: 10, right: 10, top: 8, bottom: 18 })
-    }
+    .padding({ left: 10, right: 10, top: 8, bottom: 18 })
     .backgroundColor(FcitxTheme.panelBg(this.themeMode))
     .width('100%')
     .height('100%')
