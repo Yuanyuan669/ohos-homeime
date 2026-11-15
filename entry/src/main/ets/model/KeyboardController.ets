@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -552,15 +552,12 @@ class KeyboardController {
       keyHeightRate = KEYBOARD_HEIGHT_RATE_BIG;
     }
 
-    /**-------------修改nav遮挡问题------------------**/
-    let keyHeight = 0
+    /**-------------固定为内容高度，避免横屏/竖屏留白与底排键被推出屏幕------------------**/
     this.getNavBarStatus()
-    if (!this.isNavBarVisible) {
-      keyHeight = dHeight * keyHeightRate + 280;
-      this.barPosition = dHeight - keyHeight - navigationBar_height;
-    } else {
-      keyHeight = Math.round(dHeight * keyHeightRate) + 150;
-      this.barPosition = dHeight - keyHeight - navigationBar_height;
+    let keyHeight = isLandscape ? 490 : 610;
+    this.barPosition = dHeight - keyHeight - navigationBar_height
+    if (this.barPosition < 0) {
+      this.barPosition = 0
     }
     /**--------------------------------------------**/
     // this.inputHandle.addLog(`initWindow-dWidth = ${dWidth};dHeight = ${dHeight};keyboard height = ${keyHeight};;navibar height = navigationBar_height`);
@@ -647,14 +644,25 @@ class KeyboardController {
       navigationBar_height = 0;
       keyHeightRate = KEYBOARD_HEIGHT_RATE_BIG;
     }
-    let keyHeight = Math.round(dHeight * keyHeightRate) + 250;
+    let keyHeight = isLandscape ? 490 : 610;
+    let barPosition = dHeight - keyHeight - navigationBar_height;
+    if (barPosition < 0) {
+      barPosition = 0;
+    }
     let inputStyle = StyleConfiguration.getInputStyle(isLandscape, isRkDevice, deviceInfo.deviceType);
     AppStorage.setOrCreate('inputStyle', inputStyle);
     if (this.panel) {
       this.panel.resize(dWidth, keyHeight).then(() => {
         if (this.panel) {
-          this.panel.moveTo(0, dHeight - keyHeight - navigationBar_height).then(() => {
+          this.panel.moveTo(0, barPosition).then(() => {
             this.inputHandle.addLog('resizePanel-moveTo success');
+            if (this.panel) {
+              this.panel.setUiContent('pages/Index').then(() => {
+                this.inputHandle.addLog('resizePanel-reload success');
+              }).catch((err: BusinessError) => {
+                this.inputHandle.addLog('resizePanel-reload err' + JSON.stringify(err));
+              });
+            }
           })
         }
       }).catch((err: BusinessError) => {

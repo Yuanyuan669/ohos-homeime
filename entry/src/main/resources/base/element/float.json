@@ -2,198 +2,199 @@
   "float": [
     {
       "name": "landSpace_basic_button_width",
-      "value": "74vp"
+      "value": "60vp"
     },
     {
       "name": "landSpace_basic_button_height",
-      "value": "58vp"
-    },{
+      "value": "28vp"
+    },
+    {
       "name": "landSpace_nine_button_width",
-      "value": "96vp"
+      "value": "80vp"
     },
     {
       "name": "landSpace_nine_button_height",
-      "value": "66vp"
+      "value": "28vp"
     },
     {
       "name": "landSpace_feature_picSize",
-      "value": "32vp"
+      "value": "16vp"
     },
     {
       "name": "landSpace_switch_button_width",
-      "value": "92vp"
-    },
-    {
-      "name": "landSpace_return_picSize",
-      "value": "32vp"
-    },
-    {
-      "name": "landSpace_return_button_widthType_1",
-      "value": "200vp"
-    },
-    {
-      "name": "landSpace_return_button_widthType_2",
-      "value": "100vp"
-    },
-    {
-      "name": "landSpace_space_button_width_1",
-      "value": "420vp"
-    },
-    {
-      "name": "landSpace_space_button_width_2",
-      "value": "420vp"
-    },
-    {
-      "name": "landSpace_padding_top",
-      "value": "12vp"
-    },
-    {
-      "name": "landSpace_padding_left_right",
-      "value": "40vp"
-    },
-    {
-      "name": "landSpace_downMenu_height",
       "value": "36vp"
     },
     {
+      "name": "landSpace_return_picSize",
+      "value": "16vp"
+    },
+    {
+      "name": "landSpace_return_button_widthType_1",
+      "value": "80vp"
+    },
+    {
+      "name": "landSpace_return_button_widthType_2",
+      "value": "48vp"
+    },
+    {
+      "name": "landSpace_space_button_width_1",
+      "value": "150vp"
+    },
+    {
+      "name": "landSpace_space_button_width_2",
+      "value": "150vp"
+    },
+    {
+      "name": "landSpace_padding_top",
+      "value": "2vp"
+    },
+    {
+      "name": "landSpace_padding_left_right",
+      "value": "8vp"
+    },
+    {
+      "name": "landSpace_downMenu_height",
+      "value": "18vp"
+    },
+    {
       "name": "landSpace_downMenu_pic_width",
-      "value": "32vp"
+      "value": "18vp"
     },
     {
       "name": "landSpace_downMenu_pic_height",
-      "value": "16vp"
+      "value": "10vp"
     },
     {
       "name": "landSpace_downMenu_width",
-      "value": "62vp"
+      "value": "36vp"
     },
     {
       "name": "landSpace_litter_number_fontSize",
-      "value": "10fp"
+      "value": "8fp"
     },
     {
       "name": "landSpace_en_fontSize",
-      "value": "32fp"
+      "value": "16fp"
     },
     {
       "name": "landSpace_symbol_fontSize",
-      "value": "27fp"
+      "value": "14fp"
     },
     {
       "name": "landSpace_switch_number_fontSize",
-      "value": "24fp"
+      "value": "12fp"
     },
     {
       "name": "landSpace_switch_number_fontSize_g",
-      "value": "16fp"
-    },
-    {
-      "name": "landSpace_chinese_candidate_height",
-      "value": "72vp"
-    },
-    {
-      "name": "landSpace_body_height",
-      "value": "438vp"
-    },
-    {
-      "name": "landSpace_keyboard_height",
-      "value": "500vp"
-    },
-    {
-      "name": "portrait_basic_button_width",
-      "value": "70vp"
-    },
-    {
-      "name": "portrait_basic_button_height",
-      "value": "64vp"
-    },
-    {
-      "name": "portrait_nine_button_width",
-      "value": "70vp"
-    },
-    {
-      "name": "portrait_nine_button_height",
-      "value": "64vp"
-    },
-    {
-      "name": "portrait_feature_picSize",
-      "value": "32vp"
-    },
-    {
-      "name": "portrait_switch_button_width",
-      "value": "104vp"
-    },
-    {
-      "name": "portrait_return_picSize",
-      "value": "32vp"
-    },
-    {
-      "name": "portrait_return_button_widthType_1",
-      "value": "182vp"
-    },
-    {
-      "name": "portrait_return_button_widthType_2",
-      "value": "182vp"
-    },
-    {
-      "name": "portrait_space_button_width_1",
-      "value": "310vp"
-    },
-    {
-      "name": "portrait_space_button_width_2",
-      "value": "230vp"
-    },
-    {
-      "name": "portrait_padding_top",
-      "value": "24vp"
-    },
-    {
-      "name": "portrait_padding_left_right",
-      "value": "12vp"
-    },
-    {
-      "name": "portrait_downMenu_height",
-      "value": "62vp"
-    },
-    {
-      "name": "portrait_downMenu_pic_width",
-      "value": "32vp"
-    },
-    {
-      "name": "portrait_downMenu_pic_height",
-      "value": "16vp"
-    },
-    {
-      "name": "portrait_downMenu_width",
-      "value": "62vp"
-    },
-    {
-      "name": "portrait_litter_number_fontSize",
       "value": "10fp"
     },
     {
+      "name": "landSpace_chinese_candidate_height",
+      "value": "18vp"
+    },
+    {
+      "name": "landSpace_body_height",
+      "value": "150vp"
+    },
+    {
+      "name": "landSpace_keyboard_height",
+      "value": "200vp"
+    },
+    {
+      "name": "portrait_basic_button_width",
+      "value": "64vp"
+    },
+    {
+      "name": "portrait_basic_button_height",
+      "value": "36vp"
+    },
+    {
+      "name": "portrait_nine_button_width",
+      "value": "64vp"
+    },
+    {
+      "name": "portrait_nine_button_height",
+      "value": "36vp"
+    },
+    {
+      "name": "portrait_feature_picSize",
+      "value": "20vp"
+    },
+    {
+      "name": "portrait_switch_button_width",
+      "value": "48vp"
+    },
+    {
+      "name": "portrait_return_picSize",
+      "value": "20vp"
+    },
+    {
+      "name": "portrait_return_button_widthType_1",
+      "value": "100vp"
+    },
+    {
+      "name": "portrait_return_button_widthType_2",
+      "value": "64vp"
+    },
+    {
+      "name": "portrait_space_button_width_1",
+      "value": "180vp"
+    },
+    {
+      "name": "portrait_space_button_width_2",
+      "value": "180vp"
+    },
+    {
+      "name": "portrait_padding_top",
+      "value": "2vp"
+    },
+    {
+      "name": "portrait_padding_left_right",
+      "value": "10vp"
+    },
+    {
+      "name": "portrait_downMenu_height",
+      "value": "24vp"
+    },
+    {
+      "name": "portrait_downMenu_pic_width",
+      "value": "20vp"
+    },
+    {
+      "name": "portrait_downMenu_pic_height",
+      "value": "12vp"
+    },
+    {
+      "name": "portrait_downMenu_width",
+      "value": "44vp"
+    },
+    {
+      "name": "portrait_litter_number_fontSize",
+      "value": "9fp"
+    },
+    {
       "name": "portrait_en_fontSize",
-      "value": "32fp"
+      "value": "18fp"
     },
     {
       "name": "portrait_switch_number_fontSize",
-      "value": "24fp"
+      "value": "14fp"
     },
     {
       "name": "portrait_switch_number_fontSize_g",
-      "value": "16fp"
+      "value": "12fp"
     },
     {
       "name": "portrait_chinese_candidate_height",
-      "value": "87.6vp"
+      "value": "24vp"
     },
     {
       "name": "portrait_body_height",
-      "value": "376vp"
+      "value": "190vp"
     },
     {
       "name": "portrait_keyboard_height",
-      "value": "438vp"
+      "value": "240vp"
     },
     {
       "name": "rk_basic_button_width",
@@ -294,7 +295,8 @@
     {
       "name": "rk_keyboard_height",
       "value": "372vp"
-    },{
+    },
+    {
       "name": "downMenu_height",
       "value": "62vp"
     },

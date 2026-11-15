@@ -1,4 +1,4 @@
-import { KeyStyle } from '../common/styleConfiguration'
+﻿import { KeyStyle } from '../common/styleConfiguration'
 import { InputHandler } from '../model/KeyboardController'
 import { FcitxTheme } from '../common/FcitxTheme'
 import { keyItemGray } from './KeyItemGray'
@@ -127,13 +127,14 @@ export struct NineKeyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType, inputStyle: $inputStyle })
         ChangeItem({ keyValue: 'ABC', menuType: $menuType, inputStyle: $inputStyle })
         SpaceItem({ inputStyle: $inputStyle })
         DeleteItem({ inputStyle: $inputStyle })
         ReturnItem({ inputStyle: $inputStyle })
       }
+      .justifyContent(FlexAlign.Center)
       .width('100%')
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })

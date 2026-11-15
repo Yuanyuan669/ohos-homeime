@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,6 +68,8 @@ struct Index {
   @StorageLink('themeMode') themeMode: string = 'light'
   @StorageLink('inputStyle')  inputStyle: KeyStyle = StyleConfiguration.getInputStyle(this.isLandscape, this.isRkDevice, deviceType);
   @State private colorModeWatchTimer: number = -1
+  @State private rootWidth: number = 432
+  @State private isWide: boolean = false
 
   aboutToAppear(): void {
     AppStorage.setOrCreate('isChinese', true)
@@ -133,8 +135,24 @@ struct Index {
     }
   }
 
+  private bodyHeight(): number {
+    const rows = this.menuType === 4 || (this.isNineKey && this.menuType === 3) ? 5 : 4
+    return rows * (this.isWide ? 30 : 38)
+  }
+
+  private contentHeight(): number {
+    const toolbar = this.isWide ? 18 : 24
+    let second = 0
+    if (this.menuType === 3) {
+      second = this.pinyin.length > 0 ? toolbar : 0
+    } else {
+      second = toolbar
+    }
+    return toolbar + second + this.bodyHeight() + 4
+  }
+
   build() {
-    Stack() {
+    Stack({ alignContent: Alignment.Bottom }) {
       Column() {
         if (this.isKeySet === true) {
           KeySetView({ inputStyle: $inputStyle })
@@ -143,7 +161,7 @@ struct Index {
         } else {
           PinYinView({ inputStyle: $inputStyle, menuType: $menuType })
           if(this.menuType === 3) {
-            SelectText({ inputStyle: $inputStyle })
+            SelectText({ inputStyle: $inputStyle, compact: this.isWide })
           } else {
             DownMenu({ inputStyle: $inputStyle })
           }
@@ -163,15 +181,28 @@ struct Index {
                 })
               }
             }.width('100%')
-            .height(this.inputStyle.bodyHeight)
+            .height(this.bodyHeight())
             .backgroundColor(FcitxTheme.panelBg(this.themeMode))
             .opacity(this.inputStyle.backgroundOpacity)
           }
         }
 
-      }.width('100%')
-      .height('100%')
+      }.width(this.isWide ? 460 : this.rootWidth)
+      .height(this.isKeySet || this.isMoreText ? '100%' : this.contentHeight())
       .alignItems(HorizontalAlign.Start)
+      .backgroundColor(FcitxTheme.panelBg(this.themeMode))
+      .borderRadius({ topLeft: 16, topRight: 16 })
+      .clip(true)
+      .padding({ left: 8, right: 8 })
     }
+    .width('100%')
+    .height('100%')
+    .onAreaChange((oldValue: Area, newValue: Area) => {
+      const w = parseFloat(`${newValue.width}`)
+      if (!isNaN(w)) {
+        this.rootWidth = w
+        this.isWide = w > 600
+      }
+    })
   }
 }

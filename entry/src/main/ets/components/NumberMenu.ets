@@ -1,4 +1,4 @@
-import { sourceListType } from '../model/keyboardKeyData'
+﻿import { sourceListType } from '../model/keyboardKeyData'
 import { DeleteItem } from './DeleteItem'
 import { keyItemGray } from './KeyItemGray'
 import { keyItem } from './KeyItem'
@@ -57,7 +57,7 @@ export struct NumberMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: '=/\<', menuType: $menuType, inputStyle: $inputStyle })
         ForEach(this.numberList.slice(20), (item: sourceListType) => {
           keyItem({
@@ -72,7 +72,7 @@ export struct NumberMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: 'back', menuType: $menuType,
           inputStyle: $inputStyle })
         keyItem({ keyValue: { content: '_', title: '_', upperContent: '_' },
@@ -97,6 +97,7 @@ export struct NumberMenu {
           upperContent: '.' }, color: FcitxTheme.functionKeyBg(this.themeMode), inputStyle: $inputStyle })
         ReturnItem({ inputStyle: $inputStyle })
       }
+      .justifyContent(FlexAlign.Center)
       .width('100%')
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })

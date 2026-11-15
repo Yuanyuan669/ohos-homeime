@@ -1,4 +1,4 @@
-import { sourceListType } from '../model/keyboardKeyData'
+﻿import { sourceListType } from '../model/keyboardKeyData'
 import { DeleteItem } from './DeleteItem'
 import { keyItemGray } from './KeyItemGray'
 import { keyItem } from './KeyItem'
@@ -57,7 +57,7 @@ export struct SymbolMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType, inputStyle: $inputStyle })
         ForEach(this.symbolList.slice(20), (item: sourceListType) => {
           keyItem({
@@ -73,7 +73,7 @@ export struct SymbolMenu {
       .margin({ top: this.inputStyle.paddingTop })
 
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: 'ABC', menuType: $menuType,
           inputStyle: $inputStyle })
         keyItem({ keyValue: { content: '<', title: '<', upperContent: '<' },
@@ -99,6 +99,7 @@ export struct SymbolMenu {
           color: FcitxTheme.functionKeyBg(this.themeMode), inputStyle: $inputStyle })
         ReturnItem({ inputStyle: $inputStyle })
       }
+      .justifyContent(FlexAlign.Center)
       .width('100%')
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })

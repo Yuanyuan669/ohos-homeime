@@ -1,4 +1,4 @@
-import { KeyStyle } from '../common/StyleConfiguration'
+﻿import { KeyStyle } from '../common/StyleConfiguration'
 import { InputHandler } from '../model/KeyboardController'
 import { FcitxTheme } from '../common/FcitxTheme'
 
@@ -6,6 +6,7 @@ import { FcitxTheme } from '../common/FcitxTheme'
 @Component
 export struct SelectText {
   @Link inputStyle: KeyStyle
+  @Prop compact: boolean = false
   @StorageLink("pinyin") pinyin: string = ""
   @StorageLink("isMoreText") isMoreText: boolean = false
   @StorageLink("isKeySet") isKeySet: boolean = false
@@ -75,7 +76,7 @@ export struct SelectText {
                 GridItem() {
                   Column() {
                     Text(item)
-                      .fontSize(19)
+                      .fontSize(this.compact ? 15 : 17)
                       .fontColor(FcitxTheme.textPrimary(this.themeMode))
                       .fontWeight(FontWeight.Regular)
                       .height('100%')
@@ -105,7 +106,7 @@ export struct SelectText {
                 GridItem() {
                   Column({ space: 1 }) {
                     Text(item)
-                      .fontSize(19)
+                      .fontSize(this.compact ? 15 : 17)
                       .fontColor(FcitxTheme.textPrimary(this.themeMode))
                       .fontWeight(FontWeight.Regular)
                       .textAlign(TextAlign.Center)
@@ -146,7 +147,7 @@ export struct SelectText {
             if (this.isMoreText) {
               Stack() {
                 Text("返回")
-                  .fontSize(19)
+                  .fontSize(this.compact ? 15 : 17)
                   .fontColor(FcitxTheme.textPrimary(this.themeMode))
                   .fontWeight(FontWeight.Regular)
                   .textAlign(TextAlign.Center)
@@ -206,13 +207,14 @@ export struct SelectText {
             }
 
           }
-          .width(this.isMoreText ? '20%' : '10%')
+          .width(this.isMoreText ? '20%' : (this.compact ? 32 : 44))
           .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))
         }
         .width('100%')
       }
     }
-    .height(this.isMoreText ? this.inputStyle.keyboardHeight : 32)
+    .height(this.pinyin.length <= 0 ? 0 : (this.isMoreText ? 360 : (this.compact ? 18 : 24)))
+    .clip(true)
     .width('100%')
     .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))
     .borderWidth(0)

@@ -1,4 +1,4 @@
-import { keySourceListType} from '../model/keyboardKeyData'
+﻿import { keySourceListType} from '../model/keyboardKeyData'
 import { keyItemNumber } from './KeyItemNumber'
 import { DeleteItem } from './DeleteItem'
 import { keyItemGray } from './KeyItemGray'
@@ -91,8 +91,7 @@ export struct keyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween,
-        alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType,
           inputStyle: $inputStyle })
         ChangeItem({ keyValue: 'PY', menuType: $menuType,
@@ -106,6 +105,7 @@ export struct keyMenu {
         ReturnItem({ inputStyle: $inputStyle })
 
       }
+      .justifyContent(FlexAlign.Center)
       .width('100%')
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop})

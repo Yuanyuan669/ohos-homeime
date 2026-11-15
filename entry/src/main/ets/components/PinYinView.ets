@@ -1,4 +1,4 @@
-import { KeyStyle } from '../common/styleConfiguration'
+﻿import { KeyStyle } from '../common/styleConfiguration'
 import { FcitxTheme } from '../common/FcitxTheme'
 import { InputHandler } from '../model/KeyboardController'
 
@@ -21,11 +21,11 @@ export struct PinYinView {
       Row() {
         Row() {
           Image($r('app.media.ic_clipboard_star'))
-            .width(30)
-            .height(30)
+            .width(this.inputStyle.featurePicSize)
+            .height(this.inputStyle.featurePicSize)
             .fillColor(FcitxTheme.textSecondary(this.themeMode))
         }
-        .width(46)
+        .width(32)
         .height('100%')
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center)
@@ -35,11 +35,11 @@ export struct PinYinView {
 
         Row() {
           Image($r('app.media.ic_emoji_smile'))
-            .width(30)
-            .height(30)
+            .width(this.inputStyle.featurePicSize)
+            .height(this.inputStyle.featurePicSize)
             .fillColor(FcitxTheme.textSecondary(this.themeMode))
         }
-        .width(46)
+        .width(32)
         .height('100%')
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center)
@@ -47,7 +47,7 @@ export struct PinYinView {
           this.menuType = 4
         })
       }
-      .width(104)
+      .width(68)
       .height('100%')
       .justifyContent(FlexAlign.Start)
       .alignItems(VerticalAlign.Center)
@@ -61,11 +61,11 @@ export struct PinYinView {
 
       Row() {
         Image($r('app.media.ic_arrow_down'))
-          .width(30)
-          .height(30)
+          .width(this.inputStyle.featurePicSize)
+          .height(this.inputStyle.featurePicSize)
           .fillColor(FcitxTheme.textSecondary(this.themeMode))
       }
-      .width(44)
+      .width(32)
       .height('100%')
       .justifyContent(FlexAlign.Center)
       .alignItems(VerticalAlign.Center)

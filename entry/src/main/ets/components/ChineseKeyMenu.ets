@@ -1,4 +1,4 @@
-import {keySourceListType} from '../model/keyboardKeyData'
+﻿import {keySourceListType} from '../model/keyboardKeyData'
 import { keyItemNumber } from './KeyItemNumber'
 import { DeleteItem } from './DeleteItem'
 import { keyItemGray } from './KeyItemGray'
@@ -89,7 +89,7 @@ export struct ChineseKeyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+      Row({ space: 8 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType, inputStyle: $inputStyle })
         ChangeItem({ keyValue: 'ABC', menuType: $menuType, inputStyle: $inputStyle })
         keyItem({ keyValue: { content: ',', title: ',',
@@ -100,6 +100,7 @@ export struct ChineseKeyMenu {
           upperContent: '.' }, color: FcitxTheme.functionKeyBg(this.themeMode), inputStyle: $inputStyle })
         ReturnItem({ inputStyle: $inputStyle })
       }
+      .justifyContent(FlexAlign.Center)
       .width('100%')
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
