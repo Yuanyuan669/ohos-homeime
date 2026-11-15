@@ -118,15 +118,6 @@ export struct NineKeyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Row({ space: 6 }) {
-        ForEach(NINE_KEYS.slice(9), (item: NineKeyDef) => {
-          this.nineKeyItem(item)
-        }, (item: NineKeyDef) => item.digit)
-      }
-      .width('100%')
-      .height(this.inputStyle.basicButtonHeight)
-      .margin({ top: this.inputStyle.paddingTop })
-
       Row({ space: 8 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType, inputStyle: $inputStyle })
         ChangeItem({ keyValue: 'ABC', menuType: $menuType, inputStyle: $inputStyle })

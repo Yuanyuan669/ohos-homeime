@@ -76,7 +76,7 @@ export struct SelectText {
                 GridItem() {
                   Column() {
                     Text(item)
-                      .fontSize(this.compact ? 15 : 17)
+                      .fontSize(this.compact ? 16 : 18)
                       .fontColor(FcitxTheme.textPrimary(this.themeMode))
                       .fontWeight(FontWeight.Regular)
                       .height('100%')
@@ -106,7 +106,7 @@ export struct SelectText {
                 GridItem() {
                   Column({ space: 1 }) {
                     Text(item)
-                      .fontSize(this.compact ? 15 : 17)
+                      .fontSize(this.compact ? 16 : 18)
                       .fontColor(FcitxTheme.textPrimary(this.themeMode))
                       .fontWeight(FontWeight.Regular)
                       .textAlign(TextAlign.Center)
@@ -147,7 +147,7 @@ export struct SelectText {
             if (this.isMoreText) {
               Stack() {
                 Text("返回")
-                  .fontSize(this.compact ? 15 : 17)
+                  .fontSize(this.compact ? 16 : 18)
                   .fontColor(FcitxTheme.textPrimary(this.themeMode))
                   .fontWeight(FontWeight.Regular)
                   .textAlign(TextAlign.Center)
@@ -213,7 +213,7 @@ export struct SelectText {
         .width('100%')
       }
     }
-    .height(this.pinyin.length <= 0 ? 0 : (this.isMoreText ? 360 : (this.compact ? 18 : 24)))
+    .height(this.pinyin.length <= 0 ? 0 : (this.isMoreText ? 360 : (this.compact ? 22 : 26)))
     .clip(true)
     .width('100%')
     .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))

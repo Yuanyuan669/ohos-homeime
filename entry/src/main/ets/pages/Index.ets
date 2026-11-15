@@ -136,12 +136,11 @@ struct Index {
   }
 
   private bodyHeight(): number {
-    const rows = this.menuType === 4 || (this.isNineKey && this.menuType === 3) ? 5 : 4
-    return rows * (this.isWide ? 30 : 38)
+    return 4 * (this.isWide ? 52 : 50)
   }
 
   private contentHeight(): number {
-    const toolbar = this.isWide ? 18 : 24
+    const toolbar = this.isWide ? 22 : 26
     let second = 0
     if (this.menuType === 3) {
       second = this.pinyin.length > 0 ? toolbar : 0
@@ -187,7 +186,7 @@ struct Index {
           }
         }
 
-      }.width(this.isWide ? 460 : this.rootWidth)
+      }.width(this.isWide ? 560 : this.rootWidth)
       .height(this.isKeySet || this.isMoreText ? '100%' : this.contentHeight())
       .alignItems(HorizontalAlign.Start)
       .backgroundColor(FcitxTheme.panelBg(this.themeMode))

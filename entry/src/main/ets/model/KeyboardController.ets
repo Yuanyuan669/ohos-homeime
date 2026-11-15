@@ -554,7 +554,7 @@ class KeyboardController {
 
     /**-------------固定为内容高度，避免横屏/竖屏留白与底排键被推出屏幕------------------**/
     this.getNavBarStatus()
-    let keyHeight = isLandscape ? 490 : 610;
+    let keyHeight = 660;
     this.barPosition = dHeight - keyHeight - navigationBar_height
     if (this.barPosition < 0) {
       this.barPosition = 0
@@ -644,7 +644,7 @@ class KeyboardController {
       navigationBar_height = 0;
       keyHeightRate = KEYBOARD_HEIGHT_RATE_BIG;
     }
-    let keyHeight = isLandscape ? 490 : 610;
+    let keyHeight = 660;
     let barPosition = dHeight - keyHeight - navigationBar_height;
     if (barPosition < 0) {
       barPosition = 0;

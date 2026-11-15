@@ -6,7 +6,7 @@
     },
     {
       "name": "landSpace_basic_button_height",
-      "value": "28vp"
+      "value": "50vp"
     },
     {
       "name": "landSpace_nine_button_width",
@@ -18,31 +18,31 @@
     },
     {
       "name": "landSpace_feature_picSize",
-      "value": "16vp"
+      "value": "18vp"
     },
     {
       "name": "landSpace_switch_button_width",
-      "value": "36vp"
-    },
-    {
-      "name": "landSpace_return_picSize",
-      "value": "16vp"
-    },
-    {
-      "name": "landSpace_return_button_widthType_1",
-      "value": "80vp"
-    },
-    {
-      "name": "landSpace_return_button_widthType_2",
       "value": "48vp"
     },
     {
+      "name": "landSpace_return_picSize",
+      "value": "18vp"
+    },
+    {
+      "name": "landSpace_return_button_widthType_1",
+      "value": "90vp"
+    },
+    {
+      "name": "landSpace_return_button_widthType_2",
+      "value": "60vp"
+    },
+    {
       "name": "landSpace_space_button_width_1",
-      "value": "150vp"
+      "value": "200vp"
     },
     {
       "name": "landSpace_space_button_width_2",
-      "value": "150vp"
+      "value": "200vp"
     },
     {
       "name": "landSpace_padding_top",
@@ -54,7 +54,7 @@
     },
     {
       "name": "landSpace_downMenu_height",
-      "value": "18vp"
+      "value": "22vp"
     },
     {
       "name": "landSpace_downMenu_pic_width",
@@ -74,31 +74,31 @@
     },
     {
       "name": "landSpace_en_fontSize",
-      "value": "16fp"
+      "value": "18fp"
     },
     {
       "name": "landSpace_symbol_fontSize",
-      "value": "14fp"
+      "value": "16fp"
     },
     {
       "name": "landSpace_switch_number_fontSize",
-      "value": "12fp"
+      "value": "14fp"
     },
     {
       "name": "landSpace_switch_number_fontSize_g",
-      "value": "10fp"
+      "value": "11fp"
     },
     {
       "name": "landSpace_chinese_candidate_height",
-      "value": "18vp"
+      "value": "22vp"
     },
     {
       "name": "landSpace_body_height",
-      "value": "150vp"
+      "value": "208vp"
     },
     {
       "name": "landSpace_keyboard_height",
-      "value": "200vp"
+      "value": "260vp"
     },
     {
       "name": "portrait_basic_button_width",
@@ -106,7 +106,7 @@
     },
     {
       "name": "portrait_basic_button_height",
-      "value": "36vp"
+      "value": "48vp"
     },
     {
       "name": "portrait_nine_button_width",
@@ -118,15 +118,15 @@
     },
     {
       "name": "portrait_feature_picSize",
-      "value": "20vp"
+      "value": "22vp"
     },
     {
       "name": "portrait_switch_button_width",
-      "value": "48vp"
+      "value": "54vp"
     },
     {
       "name": "portrait_return_picSize",
-      "value": "20vp"
+      "value": "22vp"
     },
     {
       "name": "portrait_return_button_widthType_1",
@@ -134,15 +134,15 @@
     },
     {
       "name": "portrait_return_button_widthType_2",
-      "value": "64vp"
+      "value": "68vp"
     },
     {
       "name": "portrait_space_button_width_1",
-      "value": "180vp"
+      "value": "220vp"
     },
     {
       "name": "portrait_space_button_width_2",
-      "value": "180vp"
+      "value": "220vp"
     },
     {
       "name": "portrait_padding_top",
@@ -154,7 +154,7 @@
     },
     {
       "name": "portrait_downMenu_height",
-      "value": "24vp"
+      "value": "26vp"
     },
     {
       "name": "portrait_downMenu_pic_width",
@@ -174,11 +174,11 @@
     },
     {
       "name": "portrait_en_fontSize",
-      "value": "18fp"
+      "value": "20fp"
     },
     {
       "name": "portrait_switch_number_fontSize",
-      "value": "14fp"
+      "value": "15fp"
     },
     {
       "name": "portrait_switch_number_fontSize_g",
@@ -186,15 +186,15 @@
     },
     {
       "name": "portrait_chinese_candidate_height",
-      "value": "24vp"
+      "value": "26vp"
     },
     {
       "name": "portrait_body_height",
-      "value": "190vp"
+      "value": "200vp"
     },
     {
       "name": "portrait_keyboard_height",
-      "value": "240vp"
+      "value": "260vp"
     },
     {
       "name": "rk_basic_button_width",
