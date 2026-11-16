@@ -144,6 +144,7 @@ export class InputHandler {
     } else {
       this.addLog('hideKeyboardSelf this.mKbController is undefined');
     }
+    KeyboardController.getCurrent()?.hidePanel();
   }
 
   public sendKeyFunction(): void {
@@ -482,6 +483,10 @@ export class InputHandler {
 }
 
 class KeyboardController {
+  private static current: KeyboardController | undefined = undefined;
+  public static getCurrent(): KeyboardController | undefined {
+    return KeyboardController.current;
+  }
   private barPosition: number = 0;
   private keyCodes: Array<number> = [];
   private mContext: InputMethodExtensionContext | undefined;
@@ -497,6 +502,23 @@ class KeyboardController {
     this.mContext = undefined;
     this.panel = undefined;
     this.mKeyboardDelegate = undefined;
+    KeyboardController.current = this;
+  }
+
+  public showPanel(): void {
+    if (this.panel) {
+      this.panel.show().catch((err: BusinessError) => {
+        this.inputHandle.addLog('showPanel err ' + JSON.stringify(err));
+      });
+    }
+  }
+
+  public hidePanel(): void {
+    if (this.panel) {
+      this.panel.hide().catch((err: BusinessError) => {
+        this.inputHandle.addLog('hidePanel err ' + JSON.stringify(err));
+      });
+    }
   }
 
   public onCreate(context: InputMethodExtensionContext): void {
@@ -604,7 +626,10 @@ class KeyboardController {
   private destroyPanel(): void {
     this.inputHandle.addLog('destroyPanel');
     if (this.panel) {
-      InputMethodEngine.destroyPanel(this.panel);
+      KeyboardController.current = undefined;
+      InputMethodEngine.destroyPanel(this.panel).catch((err: BusinessError) => {
+        this.inputHandle.addLog('destroyPanel err ' + JSON.stringify(err));
+      });
     }
   }
 
@@ -680,6 +705,7 @@ class KeyboardController {
     });
     InputMethodEngine.on('inputStart', (kbController: inputMethodEngine.KeyboardController, textInputClient: inputMethodEngine.InputClient) => {
       this.inputHandle.addLog('keyboard inputStart');
+      this.showPanel();
       this.inputHandle.onInputStart(kbController, textInputClient);
     })
     InputMethodEngine.on('inputStop', () => {

@@ -152,6 +152,15 @@ struct Index {
 
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
+      Row() {
+      }
+      .width('100%')
+      .height(this.isKeySet || this.isMoreText ? 0 : Math.max(0, (this.isWide ? 280 : 264) - this.contentHeight()))
+      .position({ x: 0, y: 0 })
+      .onClick(() => {
+        InputHandler.getInstance().hideKeyboardSelf()
+      })
+
       Column() {
         if (this.isKeySet === true) {
           KeySetView({ inputStyle: $inputStyle })
