@@ -81,7 +81,7 @@ export struct keyItemGray {
       }
     })
     .height('100%')
-    .width(this.isNineKey ? this.inputStyle.nineButtonWidth : this.inputStyle.switchButtonWidth)
+    .width(this.inputStyle.switchButtonWidth)
         .margin({ left: 3, right: 3, top: 1, bottom: 1 })
     .shadow({ radius: 1, color: FcitxTheme.shadowColor(this.themeMode), offsetY: 1 })
     .stateStyles({

@@ -57,7 +57,7 @@ export struct NumberMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Row({ space: 8 }) {
+      Row({ space: 2 }) {
         keyItemGray({ keyValue: '=/\<', menuType: $menuType, inputStyle: $inputStyle })
         ForEach(this.numberList.slice(20), (item: sourceListType) => {
           keyItem({
@@ -72,7 +72,7 @@ export struct NumberMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Row({ space: 8 }) {
+      Row({ space: 2 }) {
         keyItemGray({ keyValue: 'back', menuType: $menuType,
           inputStyle: $inputStyle })
         keyItem({ keyValue: { content: '_', title: '_', upperContent: '_' },

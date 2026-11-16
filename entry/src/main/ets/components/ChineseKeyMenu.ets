@@ -89,7 +89,7 @@ export struct ChineseKeyMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Row({ space: 8 }) {
+      Row({ space: 2 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType, inputStyle: $inputStyle })
         ChangeItem({ keyValue: 'ABC', menuType: $menuType, inputStyle: $inputStyle })
         keyItem({ keyValue: { content: ',', title: ',',

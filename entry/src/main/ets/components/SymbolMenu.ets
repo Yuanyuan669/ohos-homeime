@@ -57,7 +57,7 @@ export struct SymbolMenu {
       .height(this.inputStyle.basicButtonHeight)
       .margin({ top: this.inputStyle.paddingTop })
 
-      Row({ space: 8 }) {
+      Row({ space: 2 }) {
         keyItemGray({ keyValue: '?123', menuType: $menuType, inputStyle: $inputStyle })
         ForEach(this.symbolList.slice(20), (item: sourceListType) => {
           keyItem({
@@ -73,7 +73,7 @@ export struct SymbolMenu {
       .margin({ top: this.inputStyle.paddingTop })
 
 
-      Row({ space: 8 }) {
+      Row({ space: 2 }) {
         keyItemGray({ keyValue: 'ABC', menuType: $menuType,
           inputStyle: $inputStyle })
         keyItem({ keyValue: { content: '<', title: '<', upperContent: '<' },

@@ -6,7 +6,7 @@
     },
     {
       "name": "landSpace_basic_button_height",
-      "value": "50vp"
+      "value": "54vp"
     },
     {
       "name": "landSpace_nine_button_width",
@@ -54,7 +54,7 @@
     },
     {
       "name": "landSpace_downMenu_height",
-      "value": "22vp"
+      "value": "24vp"
     },
     {
       "name": "landSpace_downMenu_pic_width",
@@ -90,7 +90,7 @@
     },
     {
       "name": "landSpace_chinese_candidate_height",
-      "value": "22vp"
+      "value": "24vp"
     },
     {
       "name": "landSpace_body_height",
@@ -102,7 +102,7 @@
     },
     {
       "name": "portrait_basic_button_width",
-      "value": "64vp"
+      "value": "40vp"
     },
     {
       "name": "portrait_basic_button_height",
@@ -122,7 +122,7 @@
     },
     {
       "name": "portrait_switch_button_width",
-      "value": "54vp"
+      "value": "48vp"
     },
     {
       "name": "portrait_return_picSize",
@@ -134,15 +134,15 @@
     },
     {
       "name": "portrait_return_button_widthType_2",
-      "value": "68vp"
+      "value": "56vp"
     },
     {
       "name": "portrait_space_button_width_1",
-      "value": "220vp"
+      "value": "120vp"
     },
     {
       "name": "portrait_space_button_width_2",
-      "value": "220vp"
+      "value": "120vp"
     },
     {
       "name": "portrait_padding_top",

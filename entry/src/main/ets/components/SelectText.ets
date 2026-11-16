@@ -213,7 +213,7 @@ export struct SelectText {
         .width('100%')
       }
     }
-    .height(this.pinyin.length <= 0 ? 0 : (this.isMoreText ? 360 : (this.compact ? 22 : 26)))
+    .height(this.pinyin.length <= 0 ? 0 : (this.isMoreText ? 360 : (this.compact ? 24 : 26)))
     .clip(true)
     .width('100%')
     .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))
