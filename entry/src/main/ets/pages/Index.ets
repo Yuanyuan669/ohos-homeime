@@ -156,52 +156,55 @@ struct Index {
       }
       .width('100%')
       .height(this.isKeySet || this.isMoreText ? 0 : Math.max(0, (this.isWide ? 280 : 264) - this.contentHeight()))
-      .position({ x: 0, y: 0 })
       .onClick(() => {
         InputHandler.getInstance().hideKeyboardSelf()
       })
 
       Column() {
-        if (this.isKeySet === true) {
-          KeySetView({ inputStyle: $inputStyle })
-        } else if (this.menuType === 4) {
-          EmojiMenu({ menuType: $menuType, inputStyle: $inputStyle })
-        } else {
-          PinYinView({ inputStyle: $inputStyle, menuType: $menuType })
-          if(this.menuType === 3) {
-            SelectText({ inputStyle: $inputStyle, compact: this.isWide })
+        Column() {
+          if (this.isKeySet === true) {
+            KeySetView({ inputStyle: $inputStyle })
+          } else if (this.menuType === 4) {
+            EmojiMenu({ menuType: $menuType, inputStyle: $inputStyle })
           } else {
-            DownMenu({ inputStyle: $inputStyle })
-          }
-          if (!this.isMoreText || this.pinyin.length <= 0) {
-            Column() {
-              if (this.isNineKey && this.menuType === 3) {
-                NineKeyMenu({ menuType: $menuType, inputStyle: $inputStyle })
-              } else if (this.menuType === 0) {
-                keyMenu({ keyList: this.keyList, menuType: $menuType, inputStyle: $inputStyle })
-              } else if (this.menuType === 1) {
-                NumberMenu({ numberList: this.numberList, menuType: $menuType, inputStyle: $inputStyle })
-              } else if (this.menuType === 2) {
-                SymbolMenu({ symbolList: this.symbolList, menuType: $menuType, inputStyle: $inputStyle })
-              } else {
-                ChineseKeyMenu({ keyList: this.chineseKeyList, menuType: $menuType,
-                  inputStyle: $inputStyle
-                })
-              }
-            }.width('100%')
-            .height(this.bodyHeight())
-            .backgroundColor(FcitxTheme.panelBg(this.themeMode))
-            .opacity(this.inputStyle.backgroundOpacity)
+            PinYinView({ inputStyle: $inputStyle, menuType: $menuType })
+            if(this.menuType === 3) {
+              SelectText({ inputStyle: $inputStyle, compact: this.isWide })
+            } else {
+              DownMenu({ inputStyle: $inputStyle })
+            }
+            if (!this.isMoreText || this.pinyin.length <= 0) {
+              Column() {
+                if (this.isNineKey && this.menuType === 3) {
+                  NineKeyMenu({ menuType: $menuType, inputStyle: $inputStyle })
+                } else if (this.menuType === 0) {
+                  keyMenu({ keyList: this.keyList, menuType: $menuType, inputStyle: $inputStyle })
+                } else if (this.menuType === 1) {
+                  NumberMenu({ numberList: this.numberList, menuType: $menuType, inputStyle: $inputStyle })
+                } else if (this.menuType === 2) {
+                  SymbolMenu({ symbolList: this.symbolList, menuType: $menuType, inputStyle: $inputStyle })
+                } else {
+                  ChineseKeyMenu({ keyList: this.chineseKeyList, menuType: $menuType,
+                    inputStyle: $inputStyle
+                  })
+                }
+              }.width('100%')
+              .height(this.bodyHeight())
+              .backgroundColor(FcitxTheme.panelBg(this.themeMode))
+              .opacity(this.inputStyle.backgroundOpacity)
+            }
           }
         }
-
-      }.width(this.isWide ? ((this.isNineKey && this.menuType === 3) ? 520 : 640) : this.rootWidth)
-      .height(this.isKeySet || this.isMoreText ? '100%' : this.contentHeight())
-      .alignItems(HorizontalAlign.Start)
+        .width(this.isWide ? ((this.isNineKey && this.menuType === 3) ? 520 : 640) : this.rootWidth)
+        .height(this.isKeySet || this.isMoreText ? '100%' : this.contentHeight())
+        .alignItems(HorizontalAlign.Start)
+        .padding({ left: 8, right: 8 })
+      }
+      .width('100%')
+      .height(this.isKeySet || this.isMoreText ? '100%' : (this.isWide ? 280 : 264))
+      .alignItems(HorizontalAlign.Center)
       .backgroundColor(FcitxTheme.panelBg(this.themeMode))
-      .borderRadius({ topLeft: 16, topRight: 16 })
-      .clip(true)
-      .padding({ left: 8, right: 8 })
+      .justifyContent(FlexAlign.End)
     }
     .width('100%')
     .height('100%')

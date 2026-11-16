@@ -497,6 +497,7 @@ class KeyboardController {
   private mKeyboardDelegate: inputMethodEngine.KeyboardDelegate | undefined;
   private navBarHeight: number = 0
   private isNavBarVisible: boolean = false
+  private offScreenY: number = 5000
 
   constructor() {
     this.mContext = undefined;
@@ -507,7 +508,7 @@ class KeyboardController {
 
   public showPanel(): void {
     if (this.panel) {
-      this.panel.show().catch((err: BusinessError) => {
+      this.panel.moveTo(0, this.barPosition).catch((err: BusinessError) => {
         this.inputHandle.addLog('showPanel err ' + JSON.stringify(err));
       });
     }
@@ -515,7 +516,7 @@ class KeyboardController {
 
   public hidePanel(): void {
     if (this.panel) {
-      this.panel.hide().catch((err: BusinessError) => {
+      this.panel.moveTo(0, this.offScreenY).catch((err: BusinessError) => {
         this.inputHandle.addLog('hidePanel err ' + JSON.stringify(err));
       });
     }
@@ -534,7 +535,7 @@ class KeyboardController {
     this.destroyPanel();
   }
 
-  private initWindow() {
+  private async initWindow(): Promise<void> {
     // console.log("miaojx", "---------initWindow--------")
     if (this.mContext === undefined) {
       return;
@@ -575,15 +576,23 @@ class KeyboardController {
     }
 
     /**-------------固定为内容高度，避免横屏/竖屏留白与底排键被推出屏幕------------------**/
-    this.getNavBarStatus()
     let keyHeight = isLandscape ? 700 : 660;
-    this.barPosition = dHeight - keyHeight - navigationBar_height
+    let screenH = dHeight
+    try {
+      const win: window.Window = await window.getLastWindow(this.mContext)
+      const rect = win.getWindowProperties().windowRect
+      screenH = Math.max(rect.width, rect.height)
+    } catch (err) {
+      this.inputHandle.addLog('screenH from window err ' + JSON.stringify(err));
+    }
+    this.barPosition = screenH - keyHeight
+    this.offScreenY = screenH + 60
     if (this.barPosition < 0) {
       this.barPosition = 0
     }
     /**--------------------------------------------**/
     // this.inputHandle.addLog(`initWindow-dWidth = ${dWidth};dHeight = ${dHeight};keyboard height = ${keyHeight};;navibar height = navigationBar_height`);
-    this.inputHandle.addLog(`initWindow-deviceType = ${deviceInfo.deviceType}`);
+
     let panelInfo: inputMethodEngine.PanelInfo = {
       type: inputMethodEngine.PanelType.SOFT_KEYBOARD,
       flag: inputMethodEngine.PanelFlag.FLG_FIXED
@@ -606,7 +615,7 @@ class KeyboardController {
     if (!this.mContext) return
 
     try {
-      const win = await window.getLastWindow(this.mContext)
+      const win: window.Window = await window.getLastWindow(this.mContext)
 
       // 获取导航指示器避让区域（底部导航条/导航栏）
       const avoidArea = win.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR)
@@ -633,7 +642,11 @@ class KeyboardController {
     }
   }
 
-  private resizePanel(): void {
+  private async resizePanel(): Promise<void> {
+    if (this.mContext === undefined) {
+      return;
+    }
+    const imeCtx = this.mContext;
     this.inputHandle.addLog('resizeWindow');
     let dis = display.getDefaultDisplaySync();
     this.inputHandle.addLog('resizeWindow-oncall display');
@@ -670,7 +683,16 @@ class KeyboardController {
       keyHeightRate = KEYBOARD_HEIGHT_RATE_BIG;
     }
     let keyHeight = isLandscape ? 700 : 660;
-    let barPosition = dHeight - keyHeight - navigationBar_height;
+    let screenH = dHeight;
+    try {
+      const win: window.Window = await window.getLastWindow(imeCtx)
+      const rect = win.getWindowProperties().windowRect
+      screenH = Math.max(rect.width, rect.height)
+    } catch (err) {
+      this.inputHandle.addLog('resize screenH err ' + JSON.stringify(err));
+    }
+    let barPosition = screenH - keyHeight;
+    this.offScreenY = screenH + 60;
     if (barPosition < 0) {
       barPosition = 0;
     }
