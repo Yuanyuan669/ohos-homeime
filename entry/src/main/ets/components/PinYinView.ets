@@ -8,24 +8,41 @@ export struct PinYinView {
   @Link menuType: number
   @StorageLink("pinyin") pinyin: string = ""
   @StorageLink("isChinese") isChinese: boolean = true
+  @StorageLink("isNineKey") isNineKey: boolean = false
   @StorageLink("themeMode") themeMode: string = 'light'
+
+  private modeLabel(): string {
+    if (!this.isChinese) {
+      return 'English'
+    }
+    return this.isNineKey ? '拼音 · 九键' : '拼音 · 全键'
+  }
 
   build() {
     Row() {
-      Text(this.pinyin.length > 0 ? this.pinyin : (this.isChinese ? '拼音' : 'English'))
-        .fontSize(this.inputStyle.switchNumberFontSize_g)
-        .fontColor(FcitxTheme.textPrimary(this.themeMode))
-        .layoutWeight(1)
-        .margin({ left: 6 })
+      Row({ space: 6 }) {
+        Text(this.pinyin.length > 0 ? this.pinyin : this.modeLabel())
+          .fontSize(this.pinyin.length > 0 ? 16 : 12)
+          .fontWeight(this.pinyin.length > 0 ? FontWeight.Medium : FontWeight.Regular)
+          .fontColor(this.pinyin.length > 0 ? FcitxTheme.textPrimary(this.themeMode) :
+            FcitxTheme.textSecondary(this.themeMode))
+          .maxLines(1)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+        Text(this.pinyin.length > 0 ? this.modeLabel() : '')
+          .fontSize(11)
+          .fontColor(FcitxTheme.textSecondary(this.themeMode))
+      }
+      .layoutWeight(1)
+      .margin({ left: 6 })
+      .alignItems(VerticalAlign.Center)
 
       Row() {
         Row() {
-          Image($r('app.media.ic_clipboard_star'))
-            .width(this.inputStyle.featurePicSize)
-            .height(this.inputStyle.featurePicSize)
-            .fillColor(FcitxTheme.textSecondary(this.themeMode))
+          Text('设置')
+            .fontSize(12)
+            .fontColor(FcitxTheme.textSecondary(this.themeMode))
         }
-        .width(32)
+        .width(40)
         .height('100%')
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center)
@@ -39,7 +56,7 @@ export struct PinYinView {
             .height(this.inputStyle.featurePicSize)
             .fillColor(FcitxTheme.textSecondary(this.themeMode))
         }
-        .width(32)
+        .width(40)
         .height('100%')
         .justifyContent(FlexAlign.Center)
         .alignItems(VerticalAlign.Center)
@@ -47,17 +64,17 @@ export struct PinYinView {
           this.menuType = 4
         })
       }
-      .width(68)
+      .width(80)
       .height('100%')
       .justifyContent(FlexAlign.Start)
       .alignItems(VerticalAlign.Center)
-      .margin({ right: 4 })
+      .margin({ right: 2 })
 
       Column()
         .width(1)
         .height('44%')
         .backgroundColor(FcitxTheme.subtleDivider(this.themeMode))
-        .margin({ left: 4, right: 8 })
+        .margin({ left: 2, right: 2 })
 
       Row() {
         Image($r('app.media.ic_arrow_down'))
@@ -65,7 +82,7 @@ export struct PinYinView {
           .height(this.inputStyle.featurePicSize)
           .fillColor(FcitxTheme.textSecondary(this.themeMode))
       }
-      .width(32)
+      .width(40)
       .height('100%')
       .justifyContent(FlexAlign.Center)
       .alignItems(VerticalAlign.Center)
@@ -76,7 +93,8 @@ export struct PinYinView {
     .alignItems(VerticalAlign.Center)
     .width('100%')
     .backgroundColor(FcitxTheme.toolbarBg(this.themeMode))
-    .borderWidth(0)
+    .borderWidth({ bottom: 0.6 })
+    .borderColor(FcitxTheme.subtleDivider(this.themeMode))
     .height(this.inputStyle.pinyinBarHeight)
     .padding({ left: 8, right: 8 })
   }

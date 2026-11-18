@@ -36,7 +36,7 @@ export struct ChangeItem {
     }
     .backgroundColor(FcitxTheme.functionKeyBg(this.themeMode))
     .borderRadius(10)
-    .height(this.inputStyle.basicButtonHeight)
+    .height('100%')
     .width(this.inputStyle.switchButtonWidth)
     .margin({ left: 3, right: 3, top: 1, bottom: 1 })
     .shadow({ radius: 1, color: FcitxTheme.shadowColor(this.themeMode), offsetY: 1 })

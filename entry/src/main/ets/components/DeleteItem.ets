@@ -67,7 +67,7 @@ export struct DeleteItem {
       }
     })
     .width(this.inputStyle.switchButtonWidth)
-    .height(this.inputStyle.basicButtonHeight)
+    .height('100%')
         .margin({ left: 3, right: 3, top: 1, bottom: 1 })
     .shadow({ radius: 1, color: FcitxTheme.shadowColor(this.themeMode), offsetY: 1 })
     .stateStyles({

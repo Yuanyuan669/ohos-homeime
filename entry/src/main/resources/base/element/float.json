@@ -54,7 +54,7 @@
     },
     {
       "name": "landSpace_downMenu_height",
-      "value": "24vp"
+      "value": "36vp"
     },
     {
       "name": "landSpace_downMenu_pic_width",
@@ -154,7 +154,7 @@
     },
     {
       "name": "portrait_downMenu_height",
-      "value": "26vp"
+      "value": "36vp"
     },
     {
       "name": "portrait_downMenu_pic_width",

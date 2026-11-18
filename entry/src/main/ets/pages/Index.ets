@@ -140,12 +140,12 @@ struct Index {
   }
 
   private contentHeight(): number {
-    const toolbar = this.isWide ? 24 : 26
+    const toolbar = 36
     let second = 0
     if (this.menuType === 3) {
-      second = this.pinyin.length > 0 ? toolbar : 0
+      second = this.pinyin.length > 0 ? 30 : 0
     } else {
-      second = toolbar
+      second = 36
     }
     return toolbar + second + this.bodyHeight() + 4
   }
@@ -155,7 +155,7 @@ struct Index {
       Row() {
       }
       .width('100%')
-      .height(this.isKeySet || this.isMoreText ? 0 : Math.max(0, (this.isWide ? 280 : 264) - this.contentHeight()))
+      .height(this.isKeySet || this.isMoreText ? 0 : Math.max(0, (this.isWide ? 296 : 272) - this.contentHeight()))
       .onClick(() => {
         InputHandler.getInstance().hideKeyboardSelf()
       })
@@ -201,7 +201,7 @@ struct Index {
         .padding({ left: 8, right: 8 })
       }
       .width('100%')
-      .height(this.isKeySet || this.isMoreText ? '100%' : (this.isWide ? 280 : 264))
+      .height(this.isKeySet || this.isMoreText ? '100%' : (this.isWide ? 296 : 272))
       .alignItems(HorizontalAlign.Center)
       .backgroundColor(FcitxTheme.panelBg(this.themeMode))
       .justifyContent(FlexAlign.End)

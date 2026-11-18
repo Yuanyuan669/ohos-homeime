@@ -576,15 +576,9 @@ class KeyboardController {
     }
 
     /**-------------固定为内容高度，避免横屏/竖屏留白与底排键被推出屏幕------------------**/
-    let keyHeight = isLandscape ? 700 : 660;
-    let screenH = dHeight
-    try {
-      const win: window.Window = await window.getLastWindow(this.mContext)
-      const rect = win.getWindowProperties().windowRect
-      screenH = Math.max(rect.width, rect.height)
-    } catch (err) {
-      this.inputHandle.addLog('screenH from window err ' + JSON.stringify(err));
-    }
+    let keyHeight = isLandscape ? 740 : 680;
+    let screenH = await this.resolveScreenBottom(dHeight, isLandscape)
+    this.inputHandle.addLog(`screenBottom=${screenH} displayH=${dHeight}`);
     this.barPosition = screenH - keyHeight
     this.offScreenY = screenH + 60
     if (this.barPosition < 0) {
@@ -609,6 +603,32 @@ class KeyboardController {
         })
       })
     })
+  }
+
+  private async resolveScreenBottom(displayHeight: number, isLandscape: boolean): Promise<number> {
+    let screenH = displayHeight
+    try {
+      if (this.mContext === undefined) {
+        return screenH
+      }
+      const win: window.Window = await window.getLastWindow(this.mContext)
+      const rect = win.getWindowProperties().windowRect
+      const visibleH = Math.min(displayHeight, rect.height)
+      screenH = visibleH
+      try {
+        const sysBar = win.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
+        const bottomInset = sysBar.bottomRect.height
+        if (bottomInset > 0) {
+          screenH = Math.min(screenH, displayHeight - bottomInset)
+        }
+        this.inputHandle.addLog(`visibleH=${visibleH} sysBottom=${bottomInset}`)
+      } catch (avoidErr) {
+        this.inputHandle.addLog(`visibleH=${visibleH} avoidErr=${JSON.stringify(avoidErr)}`)
+      }
+    } catch (err) {
+      this.inputHandle.addLog('resolveScreenBottom err ' + JSON.stringify(err));
+    }
+    return Math.max(screenH, 0)
   }
 
   async getNavBarStatus() {
@@ -682,15 +702,9 @@ class KeyboardController {
       navigationBar_height = 0;
       keyHeightRate = KEYBOARD_HEIGHT_RATE_BIG;
     }
-    let keyHeight = isLandscape ? 700 : 660;
-    let screenH = dHeight;
-    try {
-      const win: window.Window = await window.getLastWindow(imeCtx)
-      const rect = win.getWindowProperties().windowRect
-      screenH = Math.max(rect.width, rect.height)
-    } catch (err) {
-      this.inputHandle.addLog('resize screenH err ' + JSON.stringify(err));
-    }
+    let keyHeight = isLandscape ? 740 : 680;
+    let screenH = await this.resolveScreenBottom(dHeight, isLandscape);
+    this.inputHandle.addLog(`resize screenBottom=${screenH} displayH=${dHeight}`);
     let barPosition = screenH - keyHeight;
     this.offScreenY = screenH + 60;
     if (barPosition < 0) {
