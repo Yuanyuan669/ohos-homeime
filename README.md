@@ -135,11 +135,11 @@ DevEco Studio → **Open** → 选择含 `build-profile.json5` 的工程根目�
 
 ### 5.3 签名配置（**必须替换**）
 
-`build-profile.json5` 的 `signingConfigs[0].material` **硬编码了原作者机器的绝对路径与口令**：
+`build-profile.json5` 的 `signingConfigs[0].material` **曾硬编码原作者机器的绝对路径与口令**（下文已脱敏为 `%USERPROFILE%`）：
 
 ```json5
-"certpath": "C:\\Users\\86185\\.ohos\\config\\default_MuJieInputMethod_....cer",
-"storeFile": "C:\\Users\\86185\\.ohos\\config\\default_MuJieInputMethod_....p12",
+"certpath": "%USERPROFILE%\\.ohos\\config\\default_MuJieInputMethod_....cer",
+"storeFile": "%USERPROFILE%\\.ohos\\config\\default_MuJieInputMethod_....p12",
 "keyPassword": "0000001A...",
 "storePassword": "0000001A..."
 ```
