@@ -1,5 +1,41 @@
 # 沐界输入法开发记录
 
+## 2026-11-24 候选长句核实 + 词典重建工具链
+
+### 结论：中文候选长句引擎层已支持，待办过期
+- 用设备端探针（加载 `dict_pinyin.dat` → `im_search` → `im_get_candidate`）实测：
+  - `woxiangchifan` → 候选[0]「我想吃饭」，`im_choose(0)` 一次固定全部 4 音节并整句返回；
+  - `jintiantianqihenhao` → 「今天天气很好」；`zhongguoren` → 「中国人」；`nihaoma` → 「你好吗」。
+- ETS 链路完整：`worker.chooseAndUpdate` 在 `canDoPrediction()`（全部音节已固定）时把整句经
+  `PinyinResultMessage` 提交 `insertText`；候选 0 号即整句（`imGetChoiceList` 已剥掉 fixed 前缀）。
+- 即：**长句解码与整句上屏现在就能用**，之前待办「中文候选长句仍未做」不成立（英文联想仍未做）。
+
+### 词典溯源（重要）
+- 运行时 `rawfile/dict_pinyin.dat` **并非**由仓内 `cpp/data/rawdict_utf16_65105_freq.txt` 构建：
+  该 rawdict 全部为单字条目（0 条词组），而 shipped dat 含词组。
+- 证据：用仓内 share/ 源码 + rime `pinyin_simp` 派生 rawdict（61595 条，OpenCC TSCharacters 过滤繁体）
+  重建出可加载词典，长句候选与 shipped 一致；而用仓内 rawdict 重建出的 dat 与 shipped **md5 完全一致**
+  （53e5e643…，1068442 字节）——仓内 rawdict 只是单字源，shipped dat 是上游带词组的成品。
+- 重建工具链留在 `tools/dict-rebuild/`（convert.js 生成 rawdict，构建/探针二进制在设备端跑）。
+
+### 设备端跑原生工具的坑（LHT16）
+- OHOS SDK llvm 交叉编译 aarch64-linux-ohos **动态**二进制可在 `/data/local/tmp` 直接运行
+  （`LD_LIBRARY_PATH=/system/lib64`）；**静态**链接的二进制一律 Signal 11，不要用 `-static`。
+- 该设备无 32 位运行环境（armv7 二进制报 No such file or directory），只能 aarch64。
+- `DictList::save_list` 用 `sizeof(size_t)` 写、`load_list` 用 `sizeof(uint32)` 读：
+  在 64 位主机/工具里构建词典必须把 save 端改成 uint32（tools 里已带补丁版 dictlist_save32.cpp），
+  否则产出的 dat 加载时 trie 段错位（读出的节点数是 ASCII 乱码值）。
+- hdc 坑：`hdc file send 本地文件 /目标/不存在路径` 会把目标建成**目录**（文件落在目录内、沿用源文件名）；
+  要发送成文件需先 `mkdir -p` 后 send 到 `目录/文件名`，或利用该目录语义 send 到 `目录/`。
+
+### 待办（修订）
+- 符号页：底排 `<` `>` `.` 在中文态已经由 PunctuationAdapter 适配为全角 `《` `》` `。`（显示与上屏一致），
+  剩余是可选优化：把常用中文符号（、；：？！…—）直接排进符号网格，减少翻页。
+- 空格滑动灵敏度可做成设置项。
+- 英文联想仍未做。
+- 导航栏：`resolveScreenBottom()` 现已尝试 `getLastWindow` + 避让区并有 displayHeight 兜底，
+  待在目标机型核对日志确认生效后再关闭此条。
+
 ## 2026-11-18 布局与交互改进
 
 ### 本次改动
@@ -32,9 +68,3 @@ bash scripts/sign.sh
 hdc install -r build-artifacts/entry-signed.hap
 ```
 安装后 IME 会重置为 Kika，需重新启用/切换 homeime。
-
-### 待办
-- 符号页底部 `《》` 与 `。` 的键位语义再梳理（当前可用但不够直观）。
-- 空格滑动灵敏度可做成设置项。
-- 中文候选长句、英文联想仍未做。
-- 导航栏：如果目标机型不自动上移，需要按 `displayHeight - navBarHeight` 显式定位（目前 getLastWindow 在此扩展不可用，需另找 API）。
