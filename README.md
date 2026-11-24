@@ -262,7 +262,7 @@ EMOJI_LIMIT_PER_CATEGORY = 400
 
 协议全文：http://www.apache.org/licenses/LICENSE-2.0
 
-> 待办：`oh-package.json5` 中的 `"license"` 字段当前为**空字符串**，建议填写为 `"Apache-2.0"`，以与仓库 LICENSE 保持一致。
+> 已核对（2026-11-24）：`oh-package.json5` 的 `"license"` 为 `"Apache-2.0"`，与仓库 LICENSE 一致。
 
 ---
 
