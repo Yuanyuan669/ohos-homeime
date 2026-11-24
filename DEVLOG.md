@@ -10,12 +10,14 @@
   `PinyinResultMessage` 提交 `insertText`；候选 0 号即整句（`imGetChoiceList` 已剥掉 fixed 前缀）。
 - 即：**长句解码与整句上屏现在就能用**，之前待办「中文候选长句仍未做」不成立（英文联想仍未做）。
 
-### 词典溯源（重要）
-- 运行时 `rawfile/dict_pinyin.dat` **并非**由仓内 `cpp/data/rawdict_utf16_65105_freq.txt` 构建：
-  该 rawdict 全部为单字条目（0 条词组），而 shipped dat 含词组。
-- 证据：用仓内 share/ 源码 + rime `pinyin_simp` 派生 rawdict（61595 条，OpenCC TSCharacters 过滤繁体）
-  重建出可加载词典，长句候选与 shipped 一致；而用仓内 rawdict 重建出的 dat 与 shipped **md5 完全一致**
-  （53e5e643…，1068442 字节）——仓内 rawdict 只是单字源，shipped dat 是上游带词组的成品。
+### 词典溯源（重要，2026-11-25 更正）
+- 运行时 `rawfile/dict_pinyin.dat` **就是由仓内 `cpp/data/rawdict_utf16_65105_freq.txt` 构建的**：
+  用仓内 share/ 源码 + 仓内 rawdict 重建出的 dat 与 shipped **md5 完全一致**（53e5e643…，1068442 字节）。
+- 更正：此前记录「rawdict 全部为单字条目（0 条词组）」是错的——当时的 iconv 检测在本机根本没生效（无 iconv），结论无效。
+  用 node 按 UTF-16LE 重新解码核实（**空格分隔，不是 tab**）：65105 条 = 17037 单字 + 48068 词组
+  （2 字 34070 / 3 字 7372 / 4 字 6626，如「爸爸」「八百」「欧洲市场」），rawdict 本身含词组，与 md5 一致自洽。
+- 另核实：用 rime `pinyin_simp` 派生 rawdict（61595 条，OpenCC TSCharacters 过滤繁体）也能重建出可加载词典，
+  长句候选与 shipped 一致——可作为替代词典源。
 - 重建工具链留在 `tools/dict-rebuild/`（convert.js 生成 rawdict，构建/探针二进制在设备端跑）。
 
 ### 设备端跑原生工具的坑（LHT16）
